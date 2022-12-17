@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dbConnect = require("./config/db.js");
 const mongoose = require("mongoose");
+
 mongoose.set("strictQuery", false);
 
 const app = express();
