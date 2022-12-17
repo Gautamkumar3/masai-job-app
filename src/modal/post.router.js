@@ -23,11 +23,12 @@ app.post("/", async (req, res) => {
 app.get("/", async (req, res) => {
   const { page = 1, limit = 10, q = "asc" } = req.query;
   try {
+     const allPost = await Post.find();
     const post = await Post.find()
       .sort({ createdAt: q == "asc" ? 1 : -1 })
       .skip((page - 1) * limit)
       .limit(limit);
-    res.status(200).send(post);
+    res.status(200).send({ post, total: allPost });
   } catch (er) {
     return res.status(404).send({ msg: er.message });
   }
